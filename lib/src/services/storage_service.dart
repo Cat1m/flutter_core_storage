@@ -26,6 +26,11 @@ class StorageService {
   static bool _isInitialized = false;
   static bool get isInitialized => _isInitialized;
 
+  @visibleForTesting
+  static void setTestInitialized(bool value) {
+    _isInitialized = value;
+  }
+
   // Service instances
   PreferencesService get _prefs => PreferencesService.instance;
   DatabaseService get _database {

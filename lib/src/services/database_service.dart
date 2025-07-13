@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
 import '../models/storage_result.dart';
 import '../models/database_model.dart';
 import '../exceptions/storage_exceptions.dart';
@@ -778,5 +779,11 @@ class DatabaseService {
     } else {
       return box.watch();
     }
+  }
+
+  // Add this for testing purposes
+  @visibleForTesting
+  static void setTestInstance(DatabaseService? instance) {
+    _instance = instance;
   }
 }

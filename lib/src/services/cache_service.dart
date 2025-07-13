@@ -1,6 +1,7 @@
 import 'dart:async';
-import 'dart:collection';
+
 import 'package:flutter/foundation.dart';
+
 import '../models/storage_result.dart';
 import '../models/cache_item.dart';
 import '../exceptions/storage_exceptions.dart';
@@ -677,5 +678,11 @@ class CacheService {
       return StorageResult.failure('Failed to import cache: $e',
           e is Exception ? e : Exception(e.toString()));
     }
+  }
+
+  // Add this for testing purposes
+  @visibleForTesting
+  static void setTestInstance(CacheService? instance) {
+    _instance = instance;
   }
 }

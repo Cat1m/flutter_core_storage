@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
 import '../models/storage_result.dart';
 import '../exceptions/storage_exceptions.dart';
 import '../utils/storage_utils.dart';
@@ -592,5 +593,11 @@ class SecureStorageService {
       return StorageResult.failure('Failed to cleanup expired keys: $e',
           e is Exception ? e : Exception(e.toString()));
     }
+  }
+
+  // Add this for testing purposes
+  @visibleForTesting
+  static void setTestInstance(SecureStorageService? instance) {
+    _instance = instance;
   }
 }

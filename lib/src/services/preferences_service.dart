@@ -14,6 +14,12 @@ class PreferencesService {
   SharedPreferences? _prefs;
   static bool _isInitialized = false;
 
+  // Add this for testing purposes
+  @visibleForTesting
+  static void setTestInstance(PreferencesService? instance) {
+    _instance = instance;
+  }
+
   // Private constructor
   PreferencesService._();
 

@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
+
 import '../models/storage_result.dart';
 import '../exceptions/storage_exceptions.dart';
 import '../utils/storage_utils.dart';
@@ -682,5 +682,11 @@ class FileStorageService {
   /// Get absolute file path
   String getAbsoluteFilePath(String fileName, {String? subDir}) {
     return _buildFilePath(fileName, subDir);
+  }
+
+  // Add this for testing purposes
+  @visibleForTesting
+  static void setTestInstance(FileStorageService? instance) {
+    _instance = instance;
   }
 }
