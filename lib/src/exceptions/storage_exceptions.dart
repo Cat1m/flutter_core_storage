@@ -13,28 +13,75 @@ abstract class StorageException implements Exception {
 class StorageInitializationException extends StorageException {
   const StorageInitializationException(String message, [dynamic originalError])
       : super(message, originalError);
+
+  @override
+  String toString() => 'StorageInitializationException: $message';
 }
 
 /// Thrown when storage operation fails
 class StorageOperationException extends StorageException {
-  const StorageOperationException(String message, [dynamic originalError])
+  final String? operation;
+
+  const StorageOperationException(String message,
+      [dynamic originalError, this.operation])
       : super(message, originalError);
+
+  @override
+  String toString() {
+    final op = operation != null ? ' (operation: $operation)' : '';
+    return 'StorageOperationException: $message$op';
+  }
 }
 
 /// Thrown when data serialization fails
 class StorageSerializationException extends StorageException {
-  const StorageSerializationException(String message, [dynamic originalError])
+  final Type? dataType;
+  final bool? isSerialization;
+
+  const StorageSerializationException(String message,
+      [dynamic originalError, this.dataType, this.isSerialization])
       : super(message, originalError);
+
+  @override
+  String toString() {
+    final typeInfo = dataType != null ? ' (type: $dataType)' : '';
+    final operationInfo = isSerialization != null
+        ? ' (${isSerialization! ? "serialization" : "deserialization"})'
+        : '';
+    return 'StorageSerializationException: $message$typeInfo$operationInfo';
+  }
 }
 
 /// Thrown when encryption/decryption fails
 class StorageEncryptionException extends StorageException {
-  const StorageEncryptionException(String message, [dynamic originalError])
+  final bool? isEncryption;
+
+  const StorageEncryptionException(String message,
+      [dynamic originalError, this.isEncryption])
       : super(message, originalError);
+
+  @override
+  String toString() {
+    final operationInfo = isEncryption != null
+        ? ' (${isEncryption! ? "encryption" : "decryption"})'
+        : '';
+    return 'StorageEncryptionException: $message$operationInfo';
+  }
 }
 
 /// Thrown when file operation fails
 class FileStorageException extends StorageException {
-  const FileStorageException(String message, [dynamic originalError])
+  final String? filePath;
+  final String? operation;
+
+  const FileStorageException(String message,
+      [dynamic originalError, this.filePath, this.operation])
       : super(message, originalError);
+
+  @override
+  String toString() {
+    final pathInfo = filePath != null ? ' (file: $filePath)' : '';
+    final opInfo = operation != null ? ' (operation: $operation)' : '';
+    return 'FileStorageException: $message$pathInfo$opInfo';
+  }
 }

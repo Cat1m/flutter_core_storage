@@ -1,39 +1,88 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Flutter Core Storage 🗄️
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+A comprehensive storage service package for Flutter applications providing unified access to various storage mechanisms.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
+## ✨ Features
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+- **🔑 Simple Key-Value Storage** - SharedPreferences wrapper
+- **🗃️ Database Operations** - Hive integration for complex data
+- **🔒 Secure Storage** - Encrypted storage for sensitive data
+- **📁 File Operations** - Read/write files with ease
+- **⏰ Cache Management** - TTL-based caching system
+- **🔧 Data Serialization** - JSON helpers and custom adapters
+- **🚀 Migration Support** - Database schema migrations
+- **🛡️ Type Safety** - Full Dart type safety support
 
-## Features
+## 🚀 Quick Start
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+### Installation
 
-## Getting started
+Add to your `pubspec.yaml`:
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+```yaml
+dependencies:
+  flutter_core_storage: ^1.0.0
 ```
 
-## Additional information
+### Basic Usage
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```dart
+import 'package:flutter_core_storage/flutter_core_storage.dart';
+
+// Initialize (call this in main())
+await StorageService.initialize();
+
+// Simple key-value storage
+await StorageService.instance.setString('username', 'john_doe');
+final username = await StorageService.instance.getString('username');
+
+// Secure storage for sensitive data
+await StorageService.instance.setSecure('auth_token', 'jwt_token_here');
+final token = await StorageService.instance.getSecure('auth_token');
+
+// Cache with automatic expiration
+await StorageService.instance.cache(
+  'user_data', 
+  userData, 
+  duration: Duration(hours: 1)
+);
+final cachedData = await StorageService.instance.getCached('user_data');
+```
+
+## 📚 Documentation
+
+### Storage Types
+
+1. **Preferences Storage** - For simple app settings
+2. **Secure Storage** - For tokens, passwords, sensitive data
+3. **Database Storage** - For complex objects and relationships
+4. **File Storage** - For documents, images, large data
+5. **Cache Storage** - For temporary data with TTL
+
+### API Reference
+
+[Detailed API documentation coming soon...]
+
+## 🧪 Testing
+
+```bash
+flutter test
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- [Hive](https://pub.dev/packages/hive) for fast database operations
+- [Flutter Secure Storage](https://pub.dev/packages/flutter_secure_storage) for secure data
+- [SharedPreferences](https://pub.dev/packages/shared_preferences) for simple storage
