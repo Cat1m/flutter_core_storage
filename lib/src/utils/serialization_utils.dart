@@ -27,8 +27,9 @@ class SerializationUtils {
       // Handle primitive types
       if (T == String) return decoded as T?;
       if (T == int) return (decoded is num ? decoded.toInt() : decoded) as T?;
-      if (T == double)
+      if (T == double) {
         return (decoded is num ? decoded.toDouble() : decoded) as T?;
+      }
       if (T == bool) return decoded as T?;
       if (T == dynamic) return decoded as T?;
 
@@ -220,8 +221,9 @@ class SerializationUtils {
   static String _formatBytes(int bytes) {
     if (bytes < 1024) return '$bytes B';
     if (bytes < 1024 * 1024) return '${(bytes / 1024).toStringAsFixed(1)} KB';
-    if (bytes < 1024 * 1024 * 1024)
+    if (bytes < 1024 * 1024 * 1024) {
       return '${(bytes / (1024 * 1024)).toStringAsFixed(1)} MB';
+    }
     return '${(bytes / (1024 * 1024 * 1024)).toStringAsFixed(1)} GB';
   }
 

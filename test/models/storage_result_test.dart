@@ -53,8 +53,7 @@ void main() {
       test('should create failure result with error and exception', () {
         // Arrange
         const errorMessage = 'Storage operation failed';
-        final exception =
-            const StorageOperationException('test operation failed');
+        const exception = StorageOperationException('test operation failed');
 
         // Act
         final result = StorageResult<String>.failure(errorMessage, exception);
@@ -80,7 +79,7 @@ void main() {
 
       test('should throw exception for failed result', () {
         // Arrange
-        final exception = const StorageOperationException('test error');
+        const exception = StorageOperationException('test error');
         final result = StorageResult<String>.failure('Error', exception);
 
         // Act & Assert

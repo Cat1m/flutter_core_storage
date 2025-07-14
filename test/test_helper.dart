@@ -24,6 +24,7 @@ class TestHelper {
   static void _setupMethodChannelMocks() {
     // Mock for path_provider
     const MethodChannel('plugins.flutter.io/path_provider')
+        // ignore: deprecated_member_use
         .setMockMethodCallHandler((MethodCall methodCall) async {
       switch (methodCall.method) {
         case 'getApplicationDocumentsDirectory':
@@ -39,30 +40,31 @@ class TestHelper {
 
     // Mock for flutter_secure_storage
     const MethodChannel('plugins.it_nomads.com/flutter_secure_storage')
+        // ignore: deprecated_member_use
         .setMockMethodCallHandler((MethodCall methodCall) async {
       // Simple in-memory storage for testing
-      final Map<String, String> _storage = {};
+      final Map<String, String> storage = {};
 
       switch (methodCall.method) {
         case 'write':
           final args = methodCall.arguments as Map;
-          _storage[args['key']] = args['value'];
+          storage[args['key']] = args['value'];
           return null;
         case 'read':
           final args = methodCall.arguments as Map;
-          return _storage[args['key']];
+          return storage[args['key']];
         case 'delete':
           final args = methodCall.arguments as Map;
-          _storage.remove(args['key']);
+          storage.remove(args['key']);
           return null;
         case 'deleteAll':
-          _storage.clear();
+          storage.clear();
           return null;
         case 'readAll':
-          return _storage;
+          return storage;
         case 'containsKey':
           final args = methodCall.arguments as Map;
-          return _storage.containsKey(args['key']);
+          return storage.containsKey(args['key']);
         default:
           return null;
       }
@@ -81,8 +83,10 @@ class TestHelper {
   static void tearDown() {
     // Reset method channel handlers
     const MethodChannel('plugins.flutter.io/path_provider')
+        // ignore: deprecated_member_use
         .setMockMethodCallHandler(null);
     const MethodChannel('plugins.it_nomads.com/flutter_secure_storage')
+        // ignore: deprecated_member_use
         .setMockMethodCallHandler(null);
   }
 }

@@ -1,4 +1,5 @@
 // test/integration/storage_integration_test.dart
+import 'package:flutter/foundation.dart';
 import 'package:flutter_core_storage/flutter_core_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -324,8 +325,10 @@ void main() {
         expect(writeTime, lessThan(5000)); // Less than 5 seconds
         expect(readTime, lessThan(3000)); // Less than 3 seconds
 
-        print('Write time for $operationCount operations: ${writeTime}ms');
-        print('Read time for $operationCount operations: ${readTime}ms');
+        if (kDebugMode) {
+          print('Write time for $operationCount operations: ${writeTime}ms');
+          print('Read time for $operationCount operations: ${readTime}ms');
+        }
 
         // Cleanup
         await StorageService.instance.clear();
@@ -370,10 +373,12 @@ void main() {
         final stats = await StorageService.instance.getCacheStats();
         expect(stats['size'], lessThanOrEqualTo(cacheOperations));
 
-        print('Cache time for $cacheOperations operations: ${cacheTime}ms');
-        print(
-            'Retrieve time for $cacheOperations operations: ${retrieveTime}ms');
-        print('Cache hit rate: ${stats['hitRate']}%');
+        if (kDebugMode) {
+          print('Cache time for $cacheOperations operations: ${cacheTime}ms');
+          print(
+              'Retrieve time for $cacheOperations operations: ${retrieveTime}ms');
+          print('Cache hit rate: ${stats['hitRate']}%');
+        }
       });
 
       test('should handle memory usage efficiently', () async {
@@ -415,8 +420,10 @@ void main() {
         final storageInfo = await StorageService.instance.getStorageInfo();
         expect(storageInfo['isInitialized'], isTrue);
 
-        print(
-            'Storage info after large operations: ${storageInfo['preferences']}');
+        if (kDebugMode) {
+          print(
+              'Storage info after large operations: ${storageInfo['preferences']}');
+        }
       });
     });
 

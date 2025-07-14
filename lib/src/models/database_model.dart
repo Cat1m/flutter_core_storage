@@ -61,9 +61,7 @@ mixin TimestampMixin on DatabaseModel {
   void beforeSave() {
     super.beforeSave();
     final now = DateTime.now();
-    if (createdAt == null) {
-      createdAt = now;
-    }
+    createdAt ??= now;
     updatedAt = now;
   }
 }
@@ -198,6 +196,7 @@ class QueryBuilder<T extends DatabaseModel> {
 /// Example User model implementation
 @HiveType(typeId: 0)
 class User extends DatabaseModel with TimestampMixin {
+  @override
   @HiveField(0)
   final int id;
 

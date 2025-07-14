@@ -19,7 +19,7 @@ class StorageResult<T> {
 
   /// Create a successful result without data
   factory StorageResult.successEmpty() {
-    return StorageResult._(success: true);
+    return const StorageResult._(success: true);
   }
 
   /// Create a failed result
@@ -59,7 +59,7 @@ extension StorageResultExtension<T> on StorageResult<T> {
   StorageResult<U> map<U>(U Function(T data) mapper) {
     if (success && data != null) {
       try {
-        final result = mapper(data!);
+        final result = mapper(data as T);
         return StorageResult.success(result);
       } catch (e) {
         return StorageResult.failure(
@@ -74,7 +74,7 @@ extension StorageResultExtension<T> on StorageResult<T> {
   /// Execute callback if result is successful, ignore result
   void onSuccess(void Function(T data) callback) {
     if (success && data != null) {
-      callback(data!);
+      callback(data as T);
     }
   }
 

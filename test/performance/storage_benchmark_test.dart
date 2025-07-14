@@ -1,4 +1,5 @@
 // test/performance/storage_benchmark_test.dart
+import 'package:flutter/foundation.dart';
 import 'package:flutter_core_storage/flutter_core_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -69,9 +70,13 @@ void main() {
             100 / (stopwatch.elapsedMilliseconds / 1000);
 
         // Print results
-        print('\n=== Preferences Performance Benchmark ===');
+        if (kDebugMode) {
+          print('\n=== Preferences Performance Benchmark ===');
+        }
         results.forEach((key, value) {
-          print('$key: ${value.toStringAsFixed(2)}');
+          if (kDebugMode) {
+            print('$key: ${value.toStringAsFixed(2)}');
+          }
         });
 
         // Assert minimum performance expectations
@@ -114,9 +119,13 @@ void main() {
         results['cache_misses_per_sec'] =
             100 / (stopwatch.elapsedMilliseconds / 1000);
 
-        print('\n=== Cache Performance Benchmark ===');
+        if (kDebugMode) {
+          print('\n=== Cache Performance Benchmark ===');
+        }
         results.forEach((key, value) {
-          print('$key: ${value.toStringAsFixed(2)}');
+          if (kDebugMode) {
+            print('$key: ${value.toStringAsFixed(2)}');
+          }
         });
 
         // Assert performance expectations
@@ -132,7 +141,7 @@ void main() {
         await StorageService.initialize();
 
         // Create test data of known sizes
-        final smallData = 'small';
+        const smallData = 'small';
         final mediumData = List.generate(1000, (i) => 'item_$i').join(',');
         final largeData =
             List.generate(10000, (i) => 'large_item_$i').join(',');
@@ -145,12 +154,14 @@ void main() {
         // Get cache info to check memory usage
         final cacheInfo = await StorageService.instance.getCacheStats();
 
-        print('\n=== Memory Usage Test ===');
-        print('Cache size: ${cacheInfo['size']} items');
-        print('Max cache size: ${cacheInfo['maxSize']}');
-        print('Small data length: ${smallData.length}');
-        print('Medium data length: ${mediumData.length}');
-        print('Large data length: ${largeData.length}');
+        if (kDebugMode) {
+          print('\n=== Memory Usage Test ===');
+          print('Cache size: ${cacheInfo['size']} items');
+          print('Max cache size: ${cacheInfo['maxSize']}');
+          print('Small data length: ${smallData.length}');
+          print('Medium data length: ${mediumData.length}');
+          print('Large data length: ${largeData.length}');
+        }
 
         // Verify data can be retrieved
         final retrievedSmall =
@@ -200,11 +211,13 @@ void main() {
         final totalTime = stopwatch.elapsedMilliseconds;
         final operationsPerSecond = concurrentOperations / (totalTime / 1000);
 
-        print('\n=== Concurrency Test ===');
-        print('Total operations: $concurrentOperations');
-        print('Total time: ${totalTime}ms');
-        print(
-            'Operations per second: ${operationsPerSecond.toStringAsFixed(2)}');
+        if (kDebugMode) {
+          print('\n=== Concurrency Test ===');
+          print('Total operations: $concurrentOperations');
+          print('Total time: ${totalTime}ms');
+          print(
+              'Operations per second: ${operationsPerSecond.toStringAsFixed(2)}');
+        }
 
         // Verify all operations completed successfully
         for (int i = 0; i < concurrentOperations; i++) {

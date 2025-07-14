@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import '../models/storage_result.dart';
 
@@ -105,6 +106,7 @@ class AddFieldMigration extends BaseMigration {
   @override
   Future<StorageResult<bool>> up(Box box) async {
     try {
+      // ignore: unused_local_variable
       int updatedCount = 0;
 
       for (final key in box.keys) {
@@ -127,6 +129,7 @@ class AddFieldMigration extends BaseMigration {
   @override
   Future<StorageResult<bool>> down(Box box) async {
     try {
+      // ignore: unused_local_variable
       int updatedCount = 0;
 
       for (final key in box.keys) {
@@ -248,7 +251,9 @@ class TransformFieldMigration extends BaseMigration {
             await box.put(key, value);
           } catch (e) {
             // Log but continue with other records
-            print('Warning: Failed to transform $fieldName for key $key: $e');
+            if (kDebugMode) {
+              print('Warning: Failed to transform $fieldName for key $key: $e');
+            }
           }
         }
       }
@@ -269,8 +274,10 @@ class TransformFieldMigration extends BaseMigration {
             value[fieldName] = reverseTransform(value[fieldName]);
             await box.put(key, value);
           } catch (e) {
-            print(
-                'Warning: Failed to reverse transform $fieldName for key $key: $e');
+            if (kDebugMode) {
+              print(
+                  'Warning: Failed to reverse transform $fieldName for key $key: $e');
+            }
           }
         }
       }

@@ -1,7 +1,3 @@
-// test/all_tests.dart
-/// Test runner that imports all test files
-/// Run with: flutter test test/all_tests.dart
-
 import 'package:flutter_test/flutter_test.dart';
 
 // Import all test files
@@ -14,6 +10,10 @@ import 'utils/storage_utils_test.dart' as storage_utils_tests;
 import 'utils/encryption_utils_test.dart' as encryption_utils_tests;
 
 import 'test_helper.dart';
+
+// test/all_tests.dart
+/// Test runner that imports all test files
+/// Run with: flutter test test/all_tests.dart
 
 void main() {
   setUpAll(() {

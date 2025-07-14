@@ -74,7 +74,7 @@ class SecureStorageService {
   /// Get FlutterSecureStorage instance
   FlutterSecureStorage get storage {
     if (_secureStorage == null) {
-      throw StorageOperationException(
+      throw const StorageOperationException(
           'SecureStorageService not initialized. Call initialize() first.');
     }
     return _secureStorage!;

@@ -1,12 +1,13 @@
+import 'package:flutter_core_storage/src/exceptions/storage_exceptions.dart';
+import 'package:hive/hive.dart';
+import '../models/database_model.dart';
+import '../utils/serialization_utils.dart';
+
 /// Hive Adapters for database serialization
 ///
 /// Note: Make sure to import your storage exceptions file:
 /// import '../exceptions/storage_exceptions.dart';
 ///
-import 'package:flutter_core_storage/src/exceptions/storage_exceptions.dart';
-import 'package:hive/hive.dart';
-import '../models/database_model.dart';
-import '../utils/serialization_utils.dart';
 
 /// Base adapter for Hive type adapters
 /// Provides common functionality for serializing/deserializing objects

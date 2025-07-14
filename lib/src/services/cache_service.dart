@@ -340,7 +340,7 @@ class CacheService {
       // Try to get from cache first
       final cachedResult = await getCached<T>(key);
       if (cachedResult.success && cachedResult.data != null) {
-        return StorageResult.success(cachedResult.data!);
+        return StorageResult.success(cachedResult.data as T);
       }
 
       // Fetch new data
@@ -378,6 +378,7 @@ class CacheService {
 
   /// Internal cleanup method
   int _cleanupExpiredItems() {
+    // ignore: unused_local_variable
     final now = DateTime.now();
     final keysToRemove = <String>[];
 

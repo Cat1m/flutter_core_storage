@@ -11,8 +11,7 @@ abstract class StorageException implements Exception {
 
 /// Thrown when storage initialization fails
 class StorageInitializationException extends StorageException {
-  const StorageInitializationException(String message, [dynamic originalError])
-      : super(message, originalError);
+  const StorageInitializationException(super.message, [super.originalError]);
 
   @override
   String toString() => 'StorageInitializationException: $message';
@@ -22,9 +21,8 @@ class StorageInitializationException extends StorageException {
 class StorageOperationException extends StorageException {
   final String? operation;
 
-  const StorageOperationException(String message,
-      [dynamic originalError, this.operation])
-      : super(message, originalError);
+  const StorageOperationException(super.message,
+      [super.originalError, this.operation]);
 
   @override
   String toString() {
@@ -38,9 +36,8 @@ class StorageSerializationException extends StorageException {
   final Type? dataType;
   final bool? isSerialization;
 
-  const StorageSerializationException(String message,
-      [dynamic originalError, this.dataType, this.isSerialization])
-      : super(message, originalError);
+  const StorageSerializationException(super.message,
+      [super.originalError, this.dataType, this.isSerialization]);
 
   @override
   String toString() {
@@ -56,9 +53,8 @@ class StorageSerializationException extends StorageException {
 class StorageEncryptionException extends StorageException {
   final bool? isEncryption;
 
-  const StorageEncryptionException(String message,
-      [dynamic originalError, this.isEncryption])
-      : super(message, originalError);
+  const StorageEncryptionException(super.message,
+      [super.originalError, this.isEncryption]);
 
   @override
   String toString() {
@@ -74,9 +70,8 @@ class FileStorageException extends StorageException {
   final String? filePath;
   final String? operation;
 
-  const FileStorageException(String message,
-      [dynamic originalError, this.filePath, this.operation])
-      : super(message, originalError);
+  const FileStorageException(super.message,
+      [super.originalError, this.filePath, this.operation]);
 
   @override
   String toString() {

@@ -46,7 +46,7 @@ class PreferencesService {
   /// Get SharedPreferences instance
   SharedPreferences get prefs {
     if (_prefs == null) {
-      throw StorageOperationException(
+      throw const StorageOperationException(
           'PreferencesService not initialized. Call initialize() first.');
     }
     return _prefs!;
